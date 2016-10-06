@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>All posts</title>
+    <link rel="stylesheet" href="public/style.css">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<h1>Welcome to Reddit! </h1>
+    <br>
+    <a href="users/new" method= "GET" class="btn btn-info" role="button">create your username!</a>
+      <a href="posts/new" method= "GET" class="btn btn-info" role="button">make a new post</a>
+<hr>
+
+<% if(typeof myError !== "undefined" && myError) {%>
+    <h3> <%= myError %></h3>
+    <br>
+    <% myUsers.forEach(function(name){%>
+        <h4>  <%= name %> </h4>
+        <br>
+    <%})%>
+
+
+
+    <%}%>
+
+
+<% if(typeof myPosts !== "undefined" && myPosts) { %>
+<h2>Here are all the posts!</h2>
+    <% myPosts.forEach(function(post){
+         %>
+    <h4>  <%= post.title %> </h4>
+    <h4> by: <%= post.username %></h4>
+    <h4 > <a href= "http://<%=post.content_link%>" >  <%= post.content_link %>  </a> </h4>
+
+    <form method="GET" action="/posts/<%=post.id%>/edit" >
+      <button class="btn btn-info" type="submit">Edit post</button>
+    </form>
+
+
+     <form method="POST" action="/posts/<%=post.id%>?_method=DELETE" >
+       <button class="btn btn-info" type="submit">Delete post</button>
+     </form>
+
+
+     <form method="GET" action="/posts/<%=post.id%>" >
+       <button class="btn btn-info" type="submit">Comment</button>
+     </form>
+    <%})
+}%>
+
+<br>
+<br>
+<br>
+
+
+
+  </body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>sign up home</title>
+</head>
+<body>
+
+
+    <h1>Welcome to Reddit! </h1>
+        <br>
+        <!-- <a href="users/new" method= "GET" role="button">create your username!</a> -->
+          <a href="auth/login" method= "GET"  role="button">Already a user? sign in here.</a>
+    <hr>
+
+
+<h4>Sign up below!</h4>
+    <form method="POST" action="/">
+    	<label for="textInput"> Enter your new username! </label>
+    	<input id = 'textInput' type="text" name='username'>
+<br>
+        <label for="textInput"> Enter your password! </label>
+        <input id = 'textInput' type="text" name='password'>
+<br>
+<br>
+        <label for="textInput"> Are you an admin? </label>
+        <br>
+        <input type="radio" name="admin" value="true"> Yes<br>
+        <input type="radio" name="admin" value="false" checked> No<br>
+    	<input class = 'btn btn-info' id = 'submitButton' type="submit">
+
+    </form>
+
+</body>
+</html>
