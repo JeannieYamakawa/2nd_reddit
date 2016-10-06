@@ -15,7 +15,7 @@ describe("second reddit clone", function() {
     it('should display the first page', function(done) {
       request.get('/')
         .end(function(err, res) {
-          expect(res.text).to.include('booyah');
+          expect(res.text).to.include('first test fails');
           done();
       });
     });
