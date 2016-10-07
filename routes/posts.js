@@ -9,7 +9,6 @@ const methodOverride = require('method-override');
 
 
 
-
 //if someone is an admin, they can edit or delete any post.
 //if not admin, they can edit posts where the username is equal to their req.session.username
 
@@ -47,8 +46,16 @@ router.get('/:id/edit', function(req,res){
 
 router.put('/:id', function(req, res){
     var postId = req.params.id;
-    var contentLink = req.body.content_link;
+    var wholePost = req.body;
     var postTitle = req.body.title;
+    //verify that the edited post contains an actual link.
+    if(wholePost.content_link.indexOf("http")==-1){
+            wholePost.content_link = "http://" + wholePost.content_link;
+            if(wholePost.content_link.indexOf(".")==-1){
+                wholePost.content_link = wholePost.content_link + ".com" ;
+            }
+        }
+        var contentLink = wholePost.content_link;
     knex('posts').where('id', req.body.id).update({content_link: contentLink, title: postTitle}).then(
         function(){
             res.redirect('/posts/'+ postId)

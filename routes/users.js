@@ -53,7 +53,7 @@ router.post('/loggedInHome', function(req, res) {
     // console.log(req.body.username, "****req.body.username populated?");
     if(wholePost.content_link.indexOf("http")==-1){
             wholePost.content_link = "http://" + wholePost.content_link;
-            if(wholePost.content_link.indexOf(".com")==-1){
+            if(wholePost.content_link.indexOf(".")==-1){
                 wholePost.content_link = wholePost.content_link + ".com" ;
             }
         }
