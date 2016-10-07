@@ -12,9 +12,10 @@
 <body>
     <a href="/auth/logout" class = 'btn btn-info'>Log Out</a>
 
-    <h2>make a new post!</h2>
 
 <h1>Welcome to Reddit, <%=thisUser%>!</h1>
+<h2>make a new post!</h2>
+
     <form method="POST" action='/users/loggedInHome'>
         <input id = 'userNameField' type="text" style="display:none" name='username' value = '<%= thisUser.username%>' >
         <br>
