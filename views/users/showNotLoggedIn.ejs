@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <a href="/auth/login" class = 'btn btn-info'>Log In</a>
+    <a href="/" class = 'btn btn-info'>Sign Up</a>
+
+
+
+<h1>Welcome to Reddit!</h1>
+<h1>here are the posts!</h1>
+
+    <%if (myPostsNotAdmin) {%>
+    <% myPostsNotAdmin.forEach(function(post){ %>
+        <h3>   <a href="/posts/<%=post.id%>"> <%= post.title %></a>    </h3>
+        <h4>  By: <%= post.username %> </h4>
+        <h3 > <a href= "http://<%=post.content_link%>" >  <%= post.content_link %>  </a> </h3>
+        <form method="GET" action="/posts/<%=post.id%>" >
+              <button class="btn btn-info" type="submit">Comment on this post</button>
+        </form>
+        <br>
+        <hr>
+
+    <%   })  }   %>
+
+</body>
+</html>

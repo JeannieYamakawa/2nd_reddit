@@ -45,6 +45,17 @@ router.get('/loggedInHome', function(req, res) {
 
 
 
+
+
+router.get('/loggedOutHome', function(req, res) {
+    var thisUser;
+        knex('posts').then(function(data){
+            res.render('users/showNotLoggedIn', {myPostsAdmin:false, thisUser:thisUser, myPostsNotAdmin: data})
+})
+});
+
+
+
 router.post('/loggedInHome', function(req, res) {
     var wholePost = req.body;
     var thisUser = req.session.username;

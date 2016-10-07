@@ -43,7 +43,10 @@ app.use('/auth', auth);
 
 
 app.get('/', function(req, res, next) {
-    res.render('home')
+    var thisUser;
+        knex('posts').then(function(data){
+            res.render('home',{myPostsAdmin:false, thisUser:thisUser, myPostsNotAdmin: data} )
+})
 });
 
 
