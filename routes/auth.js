@@ -30,7 +30,7 @@ router.post('/login', function(req,res, next){
                 next();
             } else {
                 req.session.username = req.body.username;
-                req.session.loggedIn = true;
+                // req.session.loggedIn = true;
                 res.redirect('/users/loggedInHome');
 
             }
@@ -40,7 +40,7 @@ router.post('/login', function(req,res, next){
 })
 
 router.get('/logout', function(req, res) {
-    req.session = null
+    req.session = null;
     res.redirect('/');
 });
 

@@ -70,7 +70,7 @@ app.post('/', function(req,res){
                 })
                 .then(function(err){
                 req.session.username = req.body.username;
-                req.session.loggedIn = true;
+                // req.session.loggedIn = true;
                 res.redirect('/users/loggedInHome')
             });
           });
