@@ -30,13 +30,13 @@ app.set('view engine', 'ejs');
 
 const users = require('./routes/users');
 const posts = require('./routes/posts');
-const comments = require('./routes/comments');
+// const comments = require('./routes/comments');
 const auth = require('./routes/auth');
 
 
 app.use('/users', users);
 app.use('/posts', posts);
-app.use('/comments', comments);
+// app.use('/comments', comments);
 app.use('/auth', auth);
 
 
@@ -70,7 +70,7 @@ app.post('/', function(req,res){
                 })
                 .then(function(err){
                 req.session.username = req.body.username;
-                // req.session.loggedIn = true;
+                req.session.admin = req.body.admin;
                 res.redirect('/users/loggedInHome')
             });
           });

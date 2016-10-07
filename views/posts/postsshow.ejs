@@ -10,35 +10,47 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+    <a class="btn btn-info" class = 'btn btn-info' role="button"href="/auth/logout">Log Out</a>
 
-    <h1>Reddit: This is your post!</h1>
+<a href="/users/loggedInHome" class="btn btn-info" role="button">go back to posts</a>
 
-    <%if (myPost && typeof myPost !== "undefined") {%>
+    <h1>Welcome to Reddit: This is your post!</h1>
+
+
 
         <h4>  <%= myPost.title %> </h4>
         <h4>  <a href = '<%= myPost.content_link %>' > <%= myPost.content_link %> </a></h4>
 
-        <!-- <form method="GET" action="/posts/<%=myPost.id%>">
-            <label for="button"> Edit this post </label>
-            <br>
-            <input id = 'button' class = 'btn btn-info' type="submit" >
-        </form> -->
+        <%if (myComments && typeof myComments !== "undefined") {%>
+            <h2>These are the comments for your post.</h2>
+
+            <% myComments.forEach(function(comment){%>
+                <h5>  <%= comment.comment_text %> </h5>
+                <h5> By: <%= comment.by_username %> </h5>
+                <%var postNumber = myComments[0].post_id %>
+
+                <form method="POST" action="/posts/<%=postNumber%>/comments/<%=comment.id%>?_method=DELETE" >
+                  <button class="btn btn-info" type="submit">Delete comment</button>
+                </form>
+
+                <form method="GET" action="/posts/<%=postNumber%>/comments/<%=comment.id%>" >
+                    <input type="text" style = 'display: none' value = '<%=myComments.id%>' name = 'id'>
+                  <button class="btn btn-info" type="submit">Edit comment</button>
+                </form>
+                <br>
+            <%})%>
 
         <form method="POST" action="/posts/<%=myPost.id%>">
         	<label for="textInput"> Enter your comment for this post! </label>
             <br>
-        	<input id = 'textInput' type="text" name='comment_text'>
-            <br>
-            <label for="textInput"> Your username: </label>
-            <br>
-        	<input id = 'textInput' type="text" name='by_username'>
+        	<input id = 'textInput' type="text" size = '60' name='comment_text'>
+
             <br>
             <input type="text" style = 'display:none' name='post_id' value = '<%=myPost.id%>' >
         	<input class = 'btn btn-info' id = 'submitButton' type="submit">
         </form>
 
 
-        <a href="/users/loggedInHome" class="btn btn-info" role="button">go back to posts</a>
     <%} else {%>
     <h4>Error: This post does not exist.</h4>
     <%}%>

@@ -30,7 +30,8 @@ router.post('/login', function(req,res, next){
                 next();
             } else {
                 req.session.username = req.body.username;
-                // req.session.loggedIn = true;
+                req.session.admin = user.admin;
+                // console.log(req.session.admin, "***req.session.admin", req.session.username, "***req.session.username");
                 res.redirect('/users/loggedInHome');
 
             }

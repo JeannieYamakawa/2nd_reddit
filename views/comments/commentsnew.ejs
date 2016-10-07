@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <h1>Welcome to Reddit!</h1>
+
+    <a href="/auth/logout" class = 'btn btn-info'>Log Out</a>
+
+
+
+    <%myPosts.post_id%>
+
+<form method="POST" action="/posts/<%=myPosts.post_id%>/comments">
+	<label for="textInput"> Enter your username! </label>
+    <br>
+	<input id = 'textInput' type="text" name='username'>
+    <br>
+	<input id = 'submitButton' class = 'btn btn-info' type="submit">
+<br>
+
+    <label for="textInput"> Enter your IIIIDDD for this post! </label>
+    <br>
+	<input id = 'textInput' type="text" name='id'>
+    <br>
+	<input id = 'submitButton'  class = 'btn btn-info' type="submit">
+
+</form>
+
+
+</body>
+</html>

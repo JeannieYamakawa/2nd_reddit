@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<h1>Welcome to Reddit!</h1>
+<a href="/auth/logout" class = 'btn btn-info'>Log Out</a>
+
+
+<a href="/users/loggedInHome" class="btn btn-info" role="button">go back to all posts</a>
+<h2>Original Post:</h2>
+
+<h4><%=myPost.title%></h4>
+<h4><a href = '<%=myPost.content_link%>'> <%=myPost.content_link%></a> </h4>
+
+<hr>
+
+<%if (adminAllComments && (adminAllComments.length > 0) ) {%>
+
+    <h2>These are the comments for your post.</h2>
+    <%var postNumber = adminAllComments[0].post_id %>
+    <% adminAllComments.forEach(function(comment){%>
+        <h5>  <%= comment.comment_text %> </h5>
+        <h5> By: <%= comment.by_username %> </h5>
+        <form method="POST" action="/posts/<%=postNumber%>/comments/<%=comment.id%>?_method=DELETE" >
+          <button class="btn btn-info" type="submit">Delete comment</button>
+        </form>
+
+        <form method="GET" action="/posts/<%=postNumber%>/comments/<%=comment.id%>" >
+            <input type="text" style = 'display: none' value = '<%=adminAllComments.id%>' name = 'id'>
+          <button class="btn btn-info" type="submit">Edit comment</button>
+        </form>
+        <br>
+    <%}) } else if (!!usersOwnComments || !!othersComments){%>
+
+    <h2>These are the comments for your post.</h2>
+            <%if(usersOwnComments[0] !==undefined ){ %>
+    <h4>
+     </h4>
+<br>
+    <%var postNumber = usersOwnComments[0].post_id %>
+    <% usersOwnComments.forEach(function(comment){%>
+        <h5>  <%= comment.comment_text %> </h5>
+        <h5> By: <%= comment.by_username %> </h5>
+        <form method="POST" action="/posts/<%=postNumber%>/comments/<%=comment.id%>?_method=DELETE" >
+          <button class="btn btn-info" type="submit">Delete comment</button>
+        </form>
+
+        <form method="GET" action="/posts/<%=postNumber%>/comments/<%=comment.id%>" >
+            <input type="text" style = 'display: none' value = '<%=usersOwnComments.id%>' name = 'id'>
+          <button class="btn btn-info" type="submit">Edit comment</button>
+        </form>
+        <br>
+    <%}) } %>
+    <% othersComments.forEach(function(comment){%>
+        <h5>  <%= comment.comment_text %> </h5>
+        <h5> By: <%= comment.by_username %> </h5>
+<br>
+    <% }) } else { %>
+
+    <h4>No comments exist for this post.</h4>
+    <%}%>
+
+
+
+
+
+</body>
+</html>

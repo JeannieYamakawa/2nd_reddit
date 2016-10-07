@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+<h1>Welcome to Reddit!</h1>
+<a href="/auth/logout" class = 'btn btn-info'>Log Out</a>
+
+
+
+<a href="/" class="btn btn-info" role="button">go back to all posts</a>
+
+
+<%if (myPostComments && typeof myPostComments !== "undefined") {%>
+
+
+    <form method="POST" action="/posts/<%=myPostComments.post_id%>/comments/<%=myPostComments.id%>?_method=PUT" >
+        <input type="text" style = 'display: none' value = '<%=myPostComments.id%>' name = 'id'>
+    <label for="comment_text">Comment: </label>
+    <input id = 'comment_text' type="text" value = '<%= myPostComments.comment_text %>' name = 'comment_text'>
+    <br>
+        <br>
+        <input id = 'button' class = 'btn btn-info' type="submit" value = 'submit changes to comment'>
+    </form>
+
+
+
+
+<% }else {%>
+<h4>Error: No comments exist for this post.</h4>
+<%}%>
+
+
+
+
+
+
+</body>
+</html>

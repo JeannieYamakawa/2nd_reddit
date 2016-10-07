@@ -5,13 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <a href="/auth/logout">Log Out</a>
+    <a href="/auth/logout" class = 'btn btn-info'>Log Out</a>
 
     <h2>make a new post!</h2>
 
-<h1>Welcome, <%=thisUser%>!</h1>
+<h1>Welcome to Reddit, <%=thisUser%>!</h1>
     <form method="POST" action='/users/loggedInHome'>
         <input id = 'userNameField' type="text" style="display:none" name='username' value = '<%= thisUser.username%>' >
         <br>
@@ -29,50 +32,56 @@
         <br>
         <br>
 
-    	<input id = 'submitButton' type="submit">
+    	<input id = 'submitButton' class = 'btn btn-info'type="submit">
 
     </form>
-
-    <!-- //if the user is an admin, display a button to delete the post. -->
-
 <br>
     <h1>here are the posts!</h1>
 
     <%if (myPostsNotAdmin) {%>
     <%thisUsersPosts.forEach(function(post){ %>
-            <h3>  <%= post.title %> </h3>
+            <h3>        <a href="/posts/<%=post.id%>"> <%= post.title %></a>          </h3>
             <h4>  By: <%= post.username %> </h4>
             <h3> <a href= "http://<%=post.content_link%>" >  <%= post.content_link %>  </a> </h3>
             <br>
             <form method="POST" action="/posts/<%=post.id%>?_method=DELETE" >
-                  <button type="submit">Delete post</button>
+                  <button type="submit" class = 'btn btn-info'>Delete post</button>
             </form>
             <form method="GET" action="/posts/<%=post.id%>/edit" >
                   <button class="btn btn-info" type="submit">Edit post</button>
             </form>
+            <form method="GET" action="/posts/<%=post.id%>" >
+                  <button class="btn btn-info" type="submit">Comment on this post</button>
+            </form>
             <hr>
         <% }) %>
     <% myPostsNotAdmin.forEach(function(post){ %>
-        <h3>  <%= post.title %> </h3>
+        <h3>   <a href="/posts/<%=post.id%>"> <%= post.title %></a>    </h3>
         <h4>  By: <%= post.username %> </h4>
         <h3 > <a href= "http://<%=post.content_link%>" >  <%= post.content_link %>  </a> </h3>
+        <form method="GET" action="/posts/<%=post.id%>" >
+              <button class="btn btn-info" type="submit">Comment on this post</button>
+        </form>
         <br>
         <hr>
 
     <%   })  }  else if (myPostsAdmin) { %>
         <% myPostsAdmin.forEach(function(post){ %>
-            <h3>  <%= post.title %> </h3>
+            <h3>   <a href="/posts/<%=post.id%>"> <%= post.title %></a>    </h3>
             <h4>  By: <%= post.username %> </h4>
 
             <h3 > <a href= "http://<%=post.content_link%>" >  <%= post.content_link %>  </a> </h3>
             <br>
 
             <form method="POST" action="/posts/<%=post.id%>?_method=DELETE" >
-                  <button type="submit">Delete post</button>
+                  <button type="submit" class = 'btn btn-info'>Delete post</button>
             </form>
 
             <form method="GET" action="/posts/<%=post.id%>/edit" >
                   <button class="btn btn-info" type="submit">Edit post</button>
+            </form>
+            <form method="GET" action="/posts/<%=post.id%>" >
+                  <button class="btn btn-info" type="submit">Comment on this post</button>
             </form>
             <hr>
             <%   })  }  %>
