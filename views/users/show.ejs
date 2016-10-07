@@ -7,9 +7,11 @@
     <title>Document</title>
 </head>
 <body>
+    <a href="/auth/logout">Log Out</a>
+
     <h2>make a new post!</h2>
 
-<h1>Welcome, <%=thisUser.username%>!</h1>
+<h1>Welcome, <%=thisUser%>!</h1>
     <form method="POST" action='/users/loggedInHome'>
         <input id = 'userNameField' type="text" style="display:none" name='username' value = '<%= thisUser.username%>' >
         <br>

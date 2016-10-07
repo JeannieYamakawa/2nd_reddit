@@ -16,21 +16,26 @@ router.get('/loggedInHome', function(req, res) {
     console.log(thisUser, "****thisUser");
     //if the user is an admin, display a button to delete the post.
     // var isAdmin;
-knex('users').where('username', thisUser.username)
+    knex('users').where('username', thisUser)
     .first()
     .then(function(data){
+
     console.log(data, "data");
     //find out if the user who has logged in is an admin.
-    if(data.admin == true){
-        knex('posts').then(function(data){
-        console.log(data,"***data from 24");
-        res.render('users/show', {myPostsAdmin:data, thisUser:thisUser, myPostsNotAdmin: false})
-    })
-    }else{
-        knex('posts').then(function(data){
-    res.render('users/show', {myPostsNotAdmin:data,  thisUser:thisUser,myPostsAdmin: false})
-    })
-    }
+    // if(data){
+        if(data.admin == true){
+            knex('posts').then(function(data){
+            console.log(data,"***posts data from 24");
+            res.render('users/show', {myPostsAdmin:data, thisUser:thisUser, myPostsNotAdmin: false})
+        })
+        }else{
+            knex('posts').then(function(data){
+        res.render('users/show', {myPostsNotAdmin:data,  thisUser:thisUser,myPostsAdmin: false})
+        })
+        }
+    // }else{
+    //     res.send('user doesnt exist')
+    // }
 })
 });
 
@@ -38,7 +43,10 @@ knex('users').where('username', thisUser.username)
 
 router.post('/loggedInHome', function(req, res) {
     var wholePost = req.body;
-    var thisUser = req.params.username;
+    var thisUser = req.session.username;
+    req.body.username = thisUser;
+    console.log(thisUser, "*****thisUser from post route");
+    console.log(req.body.username, "****req.body.username populated?");
     if(wholePost.content_link.indexOf("http")==-1){
             wholePost.content_link = "http://" + wholePost.content_link;
             if(wholePost.content_link.indexOf(".com")==-1){

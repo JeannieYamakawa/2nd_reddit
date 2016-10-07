@@ -69,10 +69,8 @@ app.post('/', function(req,res){
                 admin: req.body.admin
                 })
                 .then(function(err){
-                    console.log(req, "*****req");
-                req.session.user = req.body.username;
-                console.log(req.session.user);
-                res.cookie('loggedIn', true);
+                req.session.username = req.body.username;
+                req.session.loggedIn = true;
                 res.redirect('/users/loggedInHome')
             });
           });
@@ -82,30 +80,6 @@ app.post('/', function(req,res){
   });
 })
 
-router.post('/signup', function(req, res, next) {
-    knex('users').where({
-        email: req.body.email
-    })
-    .first()
-    .then(function(user,err) {
-        if (!user) {
-            bcrypt.hash(req.body.password, 10, function(err,hash){
-              knex('users').insert({
-                email: req.body.email,
-                hashed_password: hash
-              })
-              .then(function(){
-                  req.session.username = username;
-                  res.cookie('loggedIn', true);
-                //   res.sendStatus(200);
-                res.redirect('/secretarea');
-              });
-            });
-        } else {
-            res.redirect('/login');
-        }
-    });
-})
 
 
 

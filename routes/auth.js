@@ -29,16 +29,20 @@ router.post('/login', function(req,res, next){
                 res.render('login', {error: "Error: Invalid username or password. Please try again."})
                 next();
             } else {
-                req.session.username = user.username;
-                res.cookie('loggedIn', true);
+                req.session.username = req.body.username;
+                req.session.loggedIn = true;
                 res.redirect('/users/loggedInHome');
+
             }
         })
     }
     })
 })
 
-
+router.get('/logout', function(req, res) {
+    req.session = null
+    res.redirect('/');
+});
 
 
 //
