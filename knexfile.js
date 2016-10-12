@@ -8,6 +8,10 @@ module.exports = {
         database: '2nd_reddit_test'
       }
     },
+production: {
+    client: 'pg',
+    connection:   'postgres://pqysxyyasdboqa:gyUmXJEk-a0tT3wegYj5YEhOB2@ec2-23-23-225-246.compute-1.amazonaws.com:5432/d5p2ugapnpc6ch'
+},
 
   development: {
     client: 'pg',
