@@ -11,8 +11,8 @@ const bodyParser = require('body-parser');
 const methodOverride = require('method-override')
 const path = require('path');
 const bcrypt = require('bcrypt');
-const cookieSession = require('cookie-session');
-
+// const cookieSession = require('cookie-session');
+//
 
 const ejs = require('ejs');
 
@@ -20,10 +20,10 @@ app.use(morgan('tiny'));
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 app.use(methodOverride('_method'))
-app.use(cookieSession({
-  name: 'trackify',
-  secret: 'some_secret_key'
-}));
+// app.use(cookieSession({
+//   name: 'trackify',
+//   secret: 'some_secret_key'
+// }));
 
 app.set('view engine', 'ejs');
 
